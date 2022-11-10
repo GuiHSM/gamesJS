@@ -27,10 +27,17 @@
   </div>
   <div id="menu">
     <div id="botaoJogar">
+<<<<<<< HEAD
       <h1 id="jogar">JOGAR</h1>
     </div>
   </div>
 
+=======
+      <h1 id="jogar" onclick="game()">JOGAR</h1>
+    </div>
+  </div>
+  <script src="animacao.js"></script>
+>>>>>>> 0c2baf734ffd40b20e70f77444c2151d6551f0b9
 </body>
 
 </html>
