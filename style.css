@@ -1,40 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen&display=swap");
+
 #campo {
-  height: 480px;  
-  width: 854px; 
-  background-color: black;
-  position: relative;
-  left: 27.5%;
-  margin-top: 13.5%;
-    
+    height: 480px;
+    width: 854px;
+    background-color: black;
+    position: relative;
+    left: 27.5%;
+    margin-top: 13.5%;
+    border-radius: 5px;
 }
 
 #jogador {
-  height: 150px;  
-  width: 15px;
-  background-color: white;
-  left: 54px;
-  top: 165px;
-  position: absolute;
-} 
+    height: 150px;
+    width: 14px;
+    background-color: white;
+    left: 54px;
+    top: 165px;
+    position: absolute;
+}
 
 #inimigo {
-  height: 150px;  
-  width: 15px;
-  background-color: white;
-  left: 785px;
-  top: 165px;
-  position: absolute;
+    height: 150px;
+    width: 14px;
+    background-color: white;
+    left: 785px;
+    top: 165px;
+    position: absolute;
 }
 
 #bola {
-  height: 14px;
-  width: 14px;
-  background-color: white;
-  left: 420px;
-  top: 233px;
-  position: absolute;
+    height: 14px;
+    width: 14px;
+    background-color: white;
+    left: 420px;
+    top: 233px;
+    position: absolute;
 }
 
+#linha {
+    height: 480px;
+    width: 2px;
+    background-color: white;
+    left: 426px;
+    position: absolute;
+}
 
+#placarStyle {
+    height: 120px;
+    width: 428px;
+    background-color: black;
+    left: 38.75%;
+    top: 7.5%;
+    border-radius: 10px;
+    position: absolute;
+}
 
-   
+#placarPlayers {
+    font-family: "Verdana";
+    font-style: normal;
+    color: white;
+    text-align: center;
+    word-spacing: 175px;
+}
+
+#placarResultadoPlayer {
+    font-family: "Silkscreen", cursive;
+    font-style: normal;
+    font-size: 40px;
+    color: #f94f6d;
+    margin-top: -80px;
+    margin-left: 47px;
+}
+
+#placarResultadoCpu {
+    font-family: "Silkscreen", cursive;
+    font-style: normal;
+    font-size: 40px;
+    color: #f94f6d;
+    margin-top: -156px;
+    margin-left: 327px;
+}
+
+body {
+    background-color: aquamarine;
+}
