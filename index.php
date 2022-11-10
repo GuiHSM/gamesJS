@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="pt">
 
 <head>
   <meta charset="UTF-8">
@@ -27,9 +29,13 @@
   </div>
   <div id="menu">
     <div id="botaoJogar">
-      <h1 id="jogar">JOGAR</h1>
+      <h1 id="jogar" onclick="game()">JOGAR</h1>
+    </div>
+    <div id="titulo">
+      <h1>PONG</h1>
     </div>
   </div>
+
 
 </body>
 
