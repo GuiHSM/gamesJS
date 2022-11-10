@@ -1,0 +1,38 @@
+.campo {
+  height: 480px;  
+  width: 854px;
+  background-color: black;
+  position:relative;  
+}
+
+.jogador {
+  height: 150px;  
+  width: 15px;
+  background-color: white;
+  left: 54px;
+  top: 165px;
+  position: absolute;
+} 
+
+.inimigo {
+  height: 150px;  
+  width: 15px;
+  background-color: white;
+  left: 785px;
+  top: 165px;
+  position: absolute;
+}
+
+.bola {
+  height: 14px;
+  width: 14px;
+  background-color: white;
+  left: 420px;
+  top: 233px;
+  position: absolute;
+}
+
+div {
+  left: 541px;
+  top: 250px;
+}
