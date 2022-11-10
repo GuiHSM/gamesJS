@@ -27,3 +27,12 @@
       <h1>0</h1>
     </div>
   </div>
+  <div id="menu">
+    <div id="botaoJogar">
+      <h1 id="jogar" onclick="game()">JOGAR</h1>
+    </div>
+  </div>
+  <script src="animacao.js"></script>
+</body>
+
+</html>
