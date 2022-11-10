@@ -1,4 +1,16 @@
 tabuleiro ={};
+tabuleiro.ids={
+    jogador:document.getElementById("jogador").style,
+    guest:document.getElementById("guest").style,
+    bola:document.getElementById("bola").style,
+    campo:document.getElementById("campo").style
+}
+tabuleiro.css={
+    jogador:getComputedStyle(document.querySelector('#jogador')),
+    guest:getComputedStyle(document.querySelector('#guest')),
+    bola:getComputedStyle(document.querySelector('#bola')),
+    campo:getComputedStyle(document.querySelector('#campo'))
+}
 tabuleiro.placar ={jogador:0,inimigo:0}
 tabuleiro.bola = {velocidadeX:1, velocidadeY:1};
 tabuleiro.jogador={velocidadeY:0};
@@ -8,10 +20,10 @@ tabuleiro.indice=1;
 tabuleiro.tamanhoBola=14;
 tabuleiro.erro=3;
 function gol(){
-    if(parseInt(document.getElementById("bola").style.left)<parseInt(document.getElementById("jogador").style.left)){
+    if(parseInt(tabuleiro.ids.bola.left)<parseInt(tabuleiro.ids.jogador.left)){
         return 1;
     }
-    if(parseInt(document.getElementById("bola").style.left)>parseInt(document.getElementById("inimigo").style.left)+parseInt(document.getElementById("inimigo").style.width)){
+    if(parseInt(tabuleiro.ids.bola.left)>parseInt(tabuleiro.ids.guest.left)+parseInt(tabuleiro.ids.guest.width)){
         return 2;
     }
     return 0;
@@ -19,32 +31,32 @@ function gol(){
 function defendeu(){
     debugger;
     if((tabuleiro.bola.velocidadeX<0&&
-        parseInt(document.getElementById("bola").style.left)-tabuleiro.erro<
-        parseInt(document.getElementById("jogador").style.left)+
-        parseInt(document.getElementById("jogador").style.width)&&
-        parseInt(document.getElementById("bola").style.left)-tabuleiro.erro<
-        parseInt(document.getElementById("jogador").style.left)+
-        parseInt(document.getElementById("jogador").style.width))&&
-        parseInt(document.getElementById("bola").style.top)+tabuleiro.tamanhoBola>
-        parseInt(document.getElementById("jogador").style.top)&&
-        parseInt(document.getElementById("bola").style.top)<
-        parseInt(document.getElementById("jogador").style.top)+
-        parseInt(document.getElementById("jogador").style.height)){
+        parseInt(tabuleiro.ids.bola.left)-tabuleiro.erro<
+        parseInt(tabuleiro.ids.jogador.left)+
+        parseInt(tabuleiro.ids.jogador.width)&&
+        parseInt(tabuleiro.ids.bola.left)-tabuleiro.erro<
+        parseInt(tabuleiro.ids.jogador.left)+
+        parseInt(tabuleiro.ids.jogador.width))&&
+        parseInt(tabuleiro.ids.bola.top)+tabuleiro.tamanhoBola>
+        parseInt(tabuleiro.ids.jogador.top)&&
+        parseInt(tabuleiro.ids.bola.top)<
+        parseInt(tabuleiro.ids.jogador.top)+
+        parseInt(tabuleiro.ids.jogador.height)){
             return true;
         }
     
     if((tabuleiro.bola.velocidadeX>0&&
-        parseInt(document.getElementById("bola").style.left)+
-        tabuleiro.tamanhoBola-tabuleiro.erro<
-        parseInt(document.getElementById("inimigo").style.left)&&
-        parseInt(document.getElementById("bola").style.left)+
-        tabuleiro.tamanhoBola+tabuleiro.erro>
-        parseInt(document.getElementById("inimigo").style.left))&&
-        parseInt(document.getElementById("bola").style.top)+tabuleiro.tamanhoBola>
-        parseInt(document.getElementById("inimigo").style.top)&&
-        parseInt(document.getElementById("bola").style.top)<
-        parseInt(document.getElementById("inimigo").style.top)+
-        parseInt(document.getElementById("inimigo").style.height)){
+        parseInt(tabuleiro.ids.bola.left)+
+        parseInt(tabuleiro.ids.bola.height)-tabuleiro.erro<
+        parseInt(tabuleiro.ids.guest.left)&&
+        parseInt(tabuleiro.ids.bola.left)+
+        parseInt(tabuleiro.ids.bola.height)+tabuleiro.erro>
+        parseInt(tabuleiro.ids.guest.left))&&
+        parseInt(tabuleiro.ids.bola.top)+tabuleiro.tamanhoBola>
+        parseInt(tabuleiro.ids.guest.top)&&
+        parseInt(tabuleiro.ids.bola.top)<
+        parseInt(tabuleiro.ids.guest.top)+
+        parseInt(tabuleiro.ids.guest.height)){
             return true;
         }
     return false;
@@ -58,39 +70,39 @@ function inverterX(){
     tabuleiro.bola.velocidadeX-=2*tabuleiro.bola.velocidadeX;
 }
 function getVelocidade(){
-    if(document.getElementById("bola").left>100){
+    if(parseInt(tabuleiro.ids.bola.left)>100){
         return tabuleiro.inimigo.velocidadeY;
     }
     return tabuleiro.jogador.velocidadeY;
 }
 function errouPouco(){
-    players=["jogador","inimigo"];
+    players=["jogador","guest"];
     players.forEach(player => {
-        if((parseInt(document.getElementById("bola").style.top)+tabuleiro.erro>
-        parseInt(document.getElementById(player).style.top)+
-        parseInt(document.getElementById(player).style.height)&&
-        parseInt(document.getElementById("bola").style.top)+tabuleiro.erro<
-        parseInt(document.getElementById(player).style.top)+
-        parseInt(document.getElementById(player).style.height))&&
-        parseInt(document.getElementById("bola").style.left)>
-        parseInt(document.getElementById(player).style.left)&&
-        parseInt(document.getElementById("bola").style.left)<
-        parseInt(document.getElementById(player).style.left)+
-        parseInt(document.getElementById(player).style.width)){
+        if((parseInt(tabuleiro.ids.bola.top)+tabuleiro.erro>
+        parseInt(tabuleiro.ids[player].top)+
+        parseInt(tabuleiro.ids[player].height)&&
+        parseInt(tabuleiro.ids.bola.top)-tabuleiro.erro<
+        parseInt(tabuleiro.ids[player].top)+
+        parseInt(tabuleiro.ids[player].height))&&
+        parseInt(tabuleiro.ids.bola.left)>
+        parseInt(tabuleiro.ids[player].left)&&
+        parseInt(tabuleiro.ids.bola.left)<
+        parseInt(tabuleiro.ids[player].left)+
+        parseInt(tabuleiro.ids[player].width)){
             return true;
         }
         
-        if((parseInt(document.getElementById("bola").style.top)+
+        if((parseInt(tabuleiro.ids.bola.top)+
         tabuleiro.tamanhoBola+tabuleiro.erro>
-        parseInt(document.getElementById(player).style.top)&&
-        parseInt(document.getElementById("bola").style.top)+
+        parseInt(tabuleiro.ids[player].top)&&
+        parseInt(tabuleiro.ids.bola.top)+
         tabuleiro.tamanhoBola-tabuleiro.erro>
-        parseInt(document.getElementById(player).style.top))&&
-        parseInt(document.getElementById("bola").style.left)>
-        parseInt(document.getElementById(player).style.left)&&
-        parseInt(document.getElementById("bola").style.left)<
-        parseInt(document.getElementById(player).style.left)+
-        parseInt(document.getElementById(player).style.width)){
+        parseInt(tabuleiro.ids[player].top))&&
+        parseInt(tabuleiro.ids.bola.left)>
+        parseInt(tabuleiro.ids[player].left)&&
+        parseInt(tabuleiro.ids.bola.left)<
+        parseInt(tabuleiro.ids[player].left)+
+        parseInt(tabuleiro.ids[player].width)){
             return true;
         }
     });
@@ -103,9 +115,9 @@ function aceleracao(velo){
     tabuleiro.bola.velocidadeX=Math.sqrt(tabuleiro.estagnacao-tabuleiro.bola.velocidadeY*tabuleiro.bola.velocidadeY);
 }
 function colidiuTabuleiro(){
-    if(parseInt(document.getElementById("bola").style.top)<tabuleiro.erro
-    ||(parseInt(document.getElementById("bola").style.top)>
-    parseInt(document.getElementById("campo").style.height)-tabuleiro.erro)){
+    if(parseInt(tabuleiro.ids.bola.top)<tabuleiro.erro
+    ||(parseInt(tabuleiro.ids.bola.top)>
+    parseInt(tabuleiro.ids.campo.height)-tabuleiro.erro)){
         return true;
     }
     return false;
@@ -124,12 +136,21 @@ function invercao(){
         inverterY();
     }
 }
-
+function init(){
+    linhas=["jogador","campo","guest","bola"]
+    linhas.forEach(linha=>{
+        console.log(linha);
+        tabuleiro.ids[linha].top=tabuleiro.css[linha].top;
+        tabuleiro.ids[linha].left=tabuleiro.css[linha].left;
+        tabuleiro.ids[linha].height=tabuleiro.css[linha].height;
+        tabuleiro.ids[linha].width=tabuleiro.css[linha].width;
+    })
+}
 function game(){
-    document.getElementById("campo").style.display="block";
+    tabuleiro.ids.campo.display="block";
+    debugger;
     document.getElementById("menu").style.display="none";
     let id= null;
-    const bolaAnim = document.getElementById("bola");
     clearInterval(id);
     id = setInterval(frame, 5);
     function frame() {
@@ -142,26 +163,14 @@ function game(){
             }
             document.getElementById("placarResultadoPlayer").value="<h1>tabuleiro.placar.jogador</h1>";
             document.getElementById("placarResultadoCPU").value="<h1>tabuleiro.placar.inimigo</h1>";
+            reiniciar()
+            tabuleiro.ids.bola.top = (tabuleiro.inicial.topBola) + 'px';
+            tabuleiro.ids.bola.left = (ini) + 'px';
         } else {
             invercao();
-            bolaAnim.style.top = (parseInt(bolaAnim.style.top)+ Math.round(tabuleiro.bola.velocidadeY)) + 'px';
-            bolaAnim.style.left = (parseInt(bolaAnim.style.left)+ Math.round(tabuleiro.bola.velocidadeX)) + 'px';
+            tabuleiro.ids.bola.top = (parseInt(tabuleiro.ids.bola.top)+ Math.round(tabuleiro.bola.velocidadeY)) + 'px';
+            tabuleiro.ids.bola.left = (parseInt(tabuleiro.ids.bola.left)+ Math.round(tabuleiro.bola.velocidadeX)) + 'px';
         }
     }
 }
-function inic(){
-    let element = document.querySelector('#bola');
-    let style = getComputedStyle(element);
-    document.getElementById("bola").style.top=style.top;
-    document.getElementById("bola").style.left=style.left;
-    let nomes=["campo","jogador","inimigo"];
-    nomes.forEach(nome => {
-        element = document.querySelector(`#${nome}`);
-        style = getComputedStyle(element);
-        document.getElementById(nome).style.top=style.top;
-        document.getElementById(nome).style.left=style.left;
-        document.getElementById(nome).style.height=style.height;
-        document.getElementById(nome).style.width=style.width;
-    });
-}
-inic()
+init();

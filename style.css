@@ -62,7 +62,7 @@
     position: absolute;
 }
 
-#inimigo {
+#guest {
     height: 150px;
     width: 14px;
     background-color: white;
@@ -115,7 +115,7 @@
     margin-left: 47px;
 }
 
-#placarResultadoCpu {
+#placarResultadoGuest {
     font-family: "Silkscreen", cursive;
     font-style: normal;
     font-size: 40px;

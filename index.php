@@ -35,7 +35,7 @@
       <h1>PONG</h1>
     </div>
   </div>
-
+<script src="animacao.js"></script>
 
 </body>
 
