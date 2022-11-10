@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt">
 
 <head>
   <meta charset="UTF-8">
@@ -27,3 +25,12 @@
       <h1>0</h1>
     </div>
   </div>
+  <div id="menu">
+    <div id="botaoJogar">
+      <h1 id="jogar">JOGAR</h1>
+    </div>
+  </div>
+
+</body>
+
+</html>
