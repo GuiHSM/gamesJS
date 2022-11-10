@@ -1,11 +1,14 @@
-.campo {
+#campo {
   height: 480px;  
-  width: 854px;
+  width: 854px; 
   background-color: black;
-  position:relative;  
+  position: relative;
+  left: 27.5%;
+  margin-top: 13.5%;
+    
 }
 
-.jogador {
+#jogador {
   height: 150px;  
   width: 15px;
   background-color: white;
@@ -14,7 +17,7 @@
   position: absolute;
 } 
 
-.inimigo {
+#inimigo {
   height: 150px;  
   width: 15px;
   background-color: white;
@@ -23,7 +26,7 @@
   position: absolute;
 }
 
-.bola {
+#bola {
   height: 14px;
   width: 14px;
   background-color: white;
@@ -32,7 +35,6 @@
   position: absolute;
 }
 
-div {
-  left: 541px;
-  top: 250px;
-}
+
+
+   

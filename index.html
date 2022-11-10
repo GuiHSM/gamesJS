@@ -8,10 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="campo">
-    <div class="jogador"></div>
-    <div class="inimigo"></div>
-    <div class="bola"></div>
+    <div id="campo">
+    <div id="jogador"></div>
+    <div id="inimigo"></div>
+    <div id="bola"></div>
     </div>
+    <label id="placarJogador" for=""></label>
 </body>
 </html>
