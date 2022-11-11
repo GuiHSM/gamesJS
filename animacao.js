@@ -29,7 +29,6 @@ function gol(){
     return 0;
 }
 function defendeu(){
-    debugger;
     if((tabuleiro.bola.velocidadeX<0&&
         parseInt(tabuleiro.ids.bola.left)-tabuleiro.erro<
         parseInt(tabuleiro.ids.jogador.left)+
@@ -62,11 +61,9 @@ function defendeu(){
     return false;
 }
 function inverterY(){
-    debugger;
     tabuleiro.bola.velocidadeY-=2*tabuleiro.bola.velocidadeY;
 }
 function inverterX(){
-    debugger;
     tabuleiro.bola.velocidadeX-=2*tabuleiro.bola.velocidadeX;
 }
 function getVelocidade(){
@@ -110,7 +107,6 @@ function errouPouco(){
     return false;
 }
 function aceleracao(velo){
-    debugger;
     tabuleiro.bola.velocidadeY+=getVelocidade()*velo/tabuleiro.bola.velocidadeX;
     tabuleiro.bola.velocidadeX=Math.sqrt(tabuleiro.estagnacao-tabuleiro.bola.velocidadeY*tabuleiro.bola.velocidadeY);
 }
@@ -146,9 +142,36 @@ function init(){
         tabuleiro.ids[linha].width=tabuleiro.css[linha].width;
     })
 }
+function moveGuest(){
+    debugger;
+    if(parseInt(tabuleiro.ids.bola.top)+
+    parseInt(tabuleiro.ids.bola.height)<
+    parseInt(tabuleiro.ids.guest.top)){
+        tabuleiro.ids.guest.top=(parseInt(tabuleiro.ids.guest.top)-1)+"px";
+        return;
+    }
+    if(parseInt(tabuleiro.ids.bola.top)>
+    parseInt(tabuleiro.ids.guest.top)+
+    parseInt(tabuleiro.ids.guest.height)){
+        tabuleiro.ids.guest.top=(parseInt(tabuleiro.ids.guest.top)+1)+"px";
+    }
+}
+function moveJogador(){
+    debugger;
+    if(parseInt(tabuleiro.ids.bola.top)+
+    parseInt(tabuleiro.ids.bola.height)<
+    parseInt(tabuleiro.ids.jogador.top)+20){
+        tabuleiro.ids.jogador.top=(parseInt(tabuleiro.ids.jogador.top)-1)+"px";
+        return;
+    }
+    if(parseInt(tabuleiro.ids.bola.top)>
+    parseInt(tabuleiro.ids.jogador.top)+
+    parseInt(tabuleiro.ids.jogador.height)-20){
+        tabuleiro.ids.jogador.top=(parseInt(tabuleiro.ids.jogador.top)+1)+"px";
+    }
+}
 function game(){
     tabuleiro.ids.campo.display="block";
-    debugger;
     document.getElementById("menu").style.display="none";
     let id= null;
     clearInterval(id);
@@ -162,12 +185,14 @@ function game(){
                 tabuleiro.placar.inimigo+=1;
             }
             document.getElementById("placarResultadoPlayer").value="<h1>tabuleiro.placar.jogador</h1>";
-            document.getElementById("placarResultadoCPU").value="<h1>tabuleiro.placar.inimigo</h1>";
+            document.getElementById("placarResultadoGuest").value="<h1>tabuleiro.placar.inimigo</h1>";
             reiniciar()
             tabuleiro.ids.bola.top = (tabuleiro.inicial.topBola) + 'px';
             tabuleiro.ids.bola.left = (ini) + 'px';
         } else {
             invercao();
+            moveGuest();
+            moveJogador();
             tabuleiro.ids.bola.top = (parseInt(tabuleiro.ids.bola.top)+ Math.round(tabuleiro.bola.velocidadeY)) + 'px';
             tabuleiro.ids.bola.left = (parseInt(tabuleiro.ids.bola.left)+ Math.round(tabuleiro.bola.velocidadeX)) + 'px';
         }
