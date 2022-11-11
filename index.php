@@ -12,7 +12,7 @@
 <body>
   <div id="campo">
     <div id="jogador"></div>
-    <div id="inimigo"></div>
+    <div id="guest"></div>
     <div id="bola"></div>
     <div id="linha"></div>
   </div>
@@ -23,7 +23,7 @@
     <div id="placarResultadoPlayer">
       <h1>0</h1>
     </div>
-    <div id="placarResultadoCpu">
+    <div id="placarResultadoGuest">
       <h1>0</h1>
     </div>
   </div>
@@ -35,7 +35,8 @@
       <h1>PONG</h1>
     </div>
   </div>
-<script src="animacao.js"></script>
+
+  <script src="animacao.js"></script>
 
 </body>
 
