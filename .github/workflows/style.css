@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen&display=swap");
+
+body {
+background-image: url(http://www.morristowngamevault.com/wp-content/uploads/2013/12/dark-grey-background-texture-1024x690.jpg);
+background-repeat: no-repeat;
+background-size: 100%;
+}
+
+h1 {
+    font-family: "Silkscreen";
+    font-style: normal;
+    color: white;
+    font-size: 8vw;
+    text-align: center; 
+    text-shadow: 3px 3px #1b1b1b;   
+}
