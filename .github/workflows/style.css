@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Silkscreen&display=swap");
 
 body {
-background-image: url(http://www.morristowngamevault.com/wp-content/uploads/2013/12/dark-grey-background-texture-1024x690.jpg);
-background-repeat: no-repeat;
-background-size: 100%;
+    background-image: url(http://www.morristowngamevault.com/wp-content/uploads/2013/12/dark-grey-background-texture-1024x690.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 h1 {
@@ -11,6 +11,35 @@ h1 {
     font-style: normal;
     color: white;
     font-size: 8vw;
-    text-align: center; 
-    text-shadow: 3px 3px #1b1b1b;   
+    text-align: center;
+    text-shadow: 3px 3px #1b1b1b;
+}
+
+.responsive {
+    width: 18vw;
+    height: auto;
+}
+
+#arcadePong {
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+}
+
+#arcadeGalaga {
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+}
+
+#arcadeSpaceWar {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+}
+
+#arcadeDK {
+    position: absolute;
+    bottom: 0;
+    left: 70%;
 }
