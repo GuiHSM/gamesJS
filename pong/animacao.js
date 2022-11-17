@@ -33,7 +33,7 @@ function defendeu(){
         parseInt(tabuleiro.ids.bola.left)-tabuleiro.erro<
         parseInt(tabuleiro.ids.jogador.left)+
         parseInt(tabuleiro.ids.jogador.width)&&
-        parseInt(tabuleiro.ids.bola.left)-tabuleiro.erro<
+        parseInt(tabuleiro.ids.bola.left)+tabuleiro.erro<
         parseInt(tabuleiro.ids.jogador.left)+
         parseInt(tabuleiro.ids.jogador.width))&&
         parseInt(tabuleiro.ids.bola.top)+tabuleiro.tamanhoBola>
