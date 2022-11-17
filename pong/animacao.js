@@ -11,10 +11,12 @@ tabuleiro.css={
     bola:getComputedStyle(document.querySelector('#bola')),
     campo:getComputedStyle(document.querySelector('#campo'))
 }
+tabuleiro.mouse={x:0,y:0}
+tabuleiro.inicial={leftBola:0,topBola:0}
 tabuleiro.placar ={jogador:0,inimigo:0}
-tabuleiro.bola = {velocidadeX:1, velocidadeY:1};
-tabuleiro.jogador={velocidadeY:0};
-tabuleiro.inimigo={velocidadeY:0};
+tabuleiro.bola = {velocidadeX:1, velocidadeY:1,direcao:1};
+tabuleiro.jogador={velocidadeY:0,pos:0};
+tabuleiro.guest={velocidadeY:0,pos:0};
 tabuleiro.estagnacao=2;
 tabuleiro.indice=1;
 tabuleiro.tamanhoBola=14;
@@ -68,7 +70,7 @@ function inverterX(){
 }
 function getVelocidade(){
     if(parseInt(tabuleiro.ids.bola.left)>100){
-        return tabuleiro.inimigo.velocidadeY;
+        return tabuleiro.guest.velocidadeY;
     }
     return tabuleiro.jogador.velocidadeY;
 }
@@ -106,9 +108,17 @@ function errouPouco(){
     
     return false;
 }
+function calcularX(){
+    tabuleiro.bola.velocidadeX=Math.max(0.7,tabuleiro.estagnacao-Math.abs(tabuleiro.bola.velocidadeY));
+    if (isNaN(tabuleiro.bola.velocidadeX)){
+        tabuleiro.bola.velocidadeX=0.7;
+    }
+    tabuleiro.bola.velocidadeX*=tabuleiro.bola.direcao
+}
 function aceleracao(velo){
-    tabuleiro.bola.velocidadeY+=getVelocidade()*velo/tabuleiro.bola.velocidadeX;
-    tabuleiro.bola.velocidadeX=Math.sqrt(tabuleiro.estagnacao-tabuleiro.bola.velocidadeY*tabuleiro.bola.velocidadeY);
+    tabuleiro.bola.velocidadeY=Math.max(Math.min(tabuleiro.bola.velocidadeY+getVelocidade()+velo/Math.abs(tabuleiro.bola.velocidadeX),tabuleiro.estagnacao/10*8),-tabuleiro.estagnacao/10*8);
+    
+    calcularX();
 }
 function colidiuTabuleiro(){
     if(parseInt(tabuleiro.ids.bola.top)<tabuleiro.erro
@@ -125,8 +135,8 @@ function invercao(){
     if(defendeu()){
         tabuleiro.estagnacao+=tabuleiro.indice;
         let velocidade=tabuleiro.bola.velocidadeY;
+        tabuleiro.bola.direcao-=2*tabuleiro.bola.direcao;
         aceleracao(velocidade);
-        inverterX();
     }
     if(errouPouco()){
         inverterY();
@@ -135,61 +145,90 @@ function invercao(){
 function init(){
     linhas=["jogador","campo","guest","bola"]
     linhas.forEach(linha=>{
-        console.log(linha);
         tabuleiro.ids[linha].top=tabuleiro.css[linha].top;
         tabuleiro.ids[linha].left=tabuleiro.css[linha].left;
         tabuleiro.ids[linha].height=tabuleiro.css[linha].height;
         tabuleiro.ids[linha].width=tabuleiro.css[linha].width;
-    })
+    });
+    tabuleiro.inicial.leftBola=parseInt(tabuleiro.ids["bola"].left);
+    tabuleiro.inicial.topBola=parseInt(tabuleiro.ids["bola"].top);
 }
 function moveGuest(){
-    debugger;
+    
     if(parseInt(tabuleiro.ids.bola.top)+
     parseInt(tabuleiro.ids.bola.height)<
     parseInt(tabuleiro.ids.guest.top)){
-        tabuleiro.ids.guest.top=(parseInt(tabuleiro.ids.guest.top)-1)+"px";
+        tabuleiro.ids.guest.top=(parseInt(tabuleiro.ids.guest.top)-10)+"px";
         return;
     }
     if(parseInt(tabuleiro.ids.bola.top)>
     parseInt(tabuleiro.ids.guest.top)+
     parseInt(tabuleiro.ids.guest.height)){
-        tabuleiro.ids.guest.top=(parseInt(tabuleiro.ids.guest.top)+1)+"px";
+        tabuleiro.ids.guest.top=(parseInt(tabuleiro.ids.guest.top)+10)+"px";
     }
 }
 function moveJogador(){
-    debugger;
-    if(parseInt(tabuleiro.ids.bola.top)+
-    parseInt(tabuleiro.ids.bola.height)<
-    parseInt(tabuleiro.ids.jogador.top)+20){
-        tabuleiro.ids.jogador.top=(parseInt(tabuleiro.ids.jogador.top)-1)+"px";
+    
+    if(tabuleiro.mouse.y<
+    parseInt(tabuleiro.ids.jogador.top)+parseInt(tabuleiro.ids.jogador.height)/2){
+        if(parseInt(tabuleiro.ids.jogador.top)<6){
+            return;
+        }
+        tabuleiro.ids.jogador.top=(parseInt(tabuleiro.ids.jogador.top)-5)+"px";
         return;
+    }else if (tabuleiro.mouse.y>
+        parseInt(tabuleiro.ids.jogador.top)+parseInt(tabuleiro.ids.jogador.height)/2+10){
+            if(parseInt(tabuleiro.ids.jogador.top)+parseInt(tabuleiro.ids.jogador.height)>-6+parseInt(tabuleiro.ids.campo.height)){
+                return;
+            }
+    tabuleiro.ids.jogador.top=(parseInt(tabuleiro.ids.jogador.top)+5)+"px";
     }
-    if(parseInt(tabuleiro.ids.bola.top)>
-    parseInt(tabuleiro.ids.jogador.top)+
-    parseInt(tabuleiro.ids.jogador.height)-20){
-        tabuleiro.ids.jogador.top=(parseInt(tabuleiro.ids.jogador.top)+1)+"px";
-    }
+    
+}
+
+function iniciarJogo(){
+    tabuleiro.estagnacao=2;
+    tabuleiro.bola.direcao=getRandomDirection();
+    tabuleiro.bola.velocidadeY=1+Math.random();
+    tabuleiro.ids.jogador.top=tabuleiro.css.jogador.top;
+    tabuleiro.ids.jogador.left=tabuleiro.css.jogador.left;
+    tabuleiro.ids.guest.top=tabuleiro.css.guest.top;
+    tabuleiro.ids.guest.left=tabuleiro.css.guest.left;
+    calcularX();
+}
+function getRandomDirection() {
+    return Math.random()>0.5 ? -1:1;
+  }
+function calculaVelocidade(){
+    tabuleiro.guest.velocidadeY=parseInt(tabuleiro.ids.guest.top)-tabuleiro.guest.pos;
+    tabuleiro.guest.pos=parseInt(tabuleiro.ids.guest.top);
+    tabuleiro.jogador.velocidadeY=parseInt(tabuleiro.ids.jogador.top)-tabuleiro.jogador.pos;
+    tabuleiro.jogador.pos=parseInt(tabuleiro.ids.jogador.top);
 }
 function game(){
     tabuleiro.ids.campo.display="block";
+    document.getElementById("placarStyle").style.display="block";
     document.getElementById("menu").style.display="none";
     let id= null;
+    iniciarJogo();
     clearInterval(id);
     id = setInterval(frame, 5);
     function frame() {
         fezGol=gol();
+        console.log(`${tabuleiro.jogador.velocidadeY}+${tabuleiro.guest.velocidadeY}`);
         if (fezGol>0) {
             if(fezGol==1){
-                tabuleiro.placar.jogador+=1;
-            }else{
                 tabuleiro.placar.inimigo+=1;
+            }else{
+                tabuleiro.placar.jogador+=1;
             }
-            document.getElementById("placarResultadoPlayer").value="<h1>tabuleiro.placar.jogador</h1>";
-            document.getElementById("placarResultadoGuest").value="<h1>tabuleiro.placar.inimigo</h1>";
-            reiniciar()
+            document.getElementById("placarResultadoPlayer").innerHTML=`<h1>${tabuleiro.placar.jogador}</h1>`;
+            document.getElementById("placarResultadoGuest").innerHTML=`<h1>${tabuleiro.placar.inimigo}</h1>`;
             tabuleiro.ids.bola.top = (tabuleiro.inicial.topBola) + 'px';
-            tabuleiro.ids.bola.left = (ini) + 'px';
+            tabuleiro.ids.bola.left = (tabuleiro.inicial.leftBola) + 'px';
+            iniciarJogo();
         } else {
+            calculaVelocidade();
             invercao();
             moveGuest();
             moveJogador();
@@ -199,3 +238,7 @@ function game(){
     }
 }
 init();
+document.onmousemove = (event) => {
+    tabuleiro.mouse.x = event.clientX-Math.floor(window.innerWidth*27.5/100);
+    tabuleiro.mouse.y = event.clientY-Math.floor(window.innerHeight*13.5/100)-103;
+}
