@@ -42,6 +42,69 @@
     border-color: #f94f6d;
 }
 
+/*#menuDerrota {
+    height: 480px;
+    width: 854px;
+    background-color: black;
+    position: relative;
+    left: 27.5%;
+    margin-top: 13.5%;
+    border-radius: 7px;
+    display: inline-block;
+}
+
+#gameOver {
+    font-family: "Silkscreen";
+    font-style: normal;
+    font-size: 50px;
+    color: white;
+    margin-left: 93px; 
+}
+
+#botaoNovaPartida {
+    font-family: "Verdana";
+    font-style: normal;
+    color: white;
+    text-align: center;
+    margin-top: 125px;  
+}
+
+#novaPartida {
+    margin-left: 275px;
+    margin-right: 275px;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+#novaPartida:hover {
+    color: #f94f6d;
+    border-color: #f94f6d;
+}
+
+#botaoSair {
+    font-family: "Verdana";
+    font-style: normal;
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+}
+
+#sair {
+    border: 3px solid white;
+    border-radius: 10px;
+    margin-left: 250px;
+    margin-right: 250px;
+}
+ 
+a { 
+    text-decoration: none;
+    color:  white;
+}
+
+#sair:hover {
+    color: #f94f6d;
+    border-color: #f94f6d; 
+}*/
+
 #campo {
     height: 480px;
     width: 854px;
