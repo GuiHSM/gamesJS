@@ -42,7 +42,7 @@
     border-color: #f94f6d;
 }
 
-/*#menuDerrota {
+#menuDerrota {
     height: 480px;
     width: 854px;
     background-color: black;
@@ -103,7 +103,7 @@ a {
 #sair:hover {
     color: #f94f6d;
     border-color: #f94f6d; 
-}*/
+}
 
 #campo {
     height: 480px;

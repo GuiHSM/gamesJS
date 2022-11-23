@@ -143,7 +143,8 @@ function invercao(){
     }
 }
 function init(){
-    linhas=["jogador","campo","guest","bola"]
+    linhas=["jogador","campo","guest","bola"];
+    document.getElementById("menuDerrota").style.display="none";
     linhas.forEach(linha=>{
         tabuleiro.ids[linha].top=tabuleiro.css[linha].top;
         tabuleiro.ids[linha].left=tabuleiro.css[linha].left;
@@ -205,7 +206,11 @@ function calculaVelocidade(){
     tabuleiro.jogador.velocidadeY=parseInt(tabuleiro.ids.jogador.top)-tabuleiro.jogador.pos;
     tabuleiro.jogador.pos=parseInt(tabuleiro.ids.jogador.top);
 }
-function game(){
+function iniciar(){
+    tabuleiro.placar.jogador=0;
+    tabuleiro.placar.inimigo=0;
+    document.getElementById("placarResultadoPlayer").innerHTML=`<h1>${tabuleiro.placar.jogador}</h1>`;
+    document.getElementById("placarResultadoGuest").innerHTML=`<h1>${tabuleiro.placar.inimigo}</h1>`;
     tabuleiro.ids.campo.display="block";
     document.getElementById("placarStyle").style.display="block";
     document.getElementById("menu").style.display="none";
@@ -226,6 +231,13 @@ function game(){
             document.getElementById("placarResultadoGuest").innerHTML=`<h1>${tabuleiro.placar.inimigo}</h1>`;
             tabuleiro.ids.bola.top = (tabuleiro.inicial.topBola) + 'px';
             tabuleiro.ids.bola.left = (tabuleiro.inicial.leftBola) + 'px';
+            if(Math.max(tabuleiro.placar.jogador,tabuleiro.placar.inimigo)>0){
+                tabuleiro.ids.campo.display="none";
+                document.getElementById("inicio").style.display="none";
+                document.getElementById("menuDerrota").style.display="block";
+                document.getElementById("menu").style.display="block"
+                clearInterval(id);
+            }
             iniciarJogo();
         } else {
             calculaVelocidade();
@@ -236,6 +248,11 @@ function game(){
             tabuleiro.ids.bola.left = (parseInt(tabuleiro.ids.bola.left)+ Math.round(tabuleiro.bola.velocidadeX)) + 'px';
         }
     }
+}
+function comeco(){
+    document.getElementById("inicio").style.display="block";
+    document.getElementById("placarStyle").style.display="none";
+    document.getElementById("menuDerrota").style.display="none";
 }
 init();
 document.onmousemove = (event) => {

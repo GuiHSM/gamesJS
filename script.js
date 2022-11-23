@@ -1,0 +1,1 @@
+window.location.href=".github\\workflows\\index.html"
