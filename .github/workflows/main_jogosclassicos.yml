@@ -56,5 +56,5 @@ jobs:
         with:
           app-name: 'jogosclassicos'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C24E120B41A045CB9134C0817E481336 }}
+          publish-profile: ${{}}
           package: .
